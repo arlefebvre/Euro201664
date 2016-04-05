@@ -14,7 +14,7 @@ public class HomeController {
     @RequestMapping("/")
     @ResponseBody
     String home() {
-        return "Hello World!";
+        return "Euro201664 Home Page";
     }
 
     public static void main(String[] args) throws Exception {
