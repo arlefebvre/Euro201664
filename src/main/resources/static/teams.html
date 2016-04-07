@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Euro201664 - Pronostics entre potes</title>
+    <title>Euro201664 - Pronostics entre potes - Equipes</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="./bower_components/bootstrap-css-only/css/bootstrap.min.css"/>
@@ -39,41 +39,22 @@
                 <div class="form-group">
                     <input type="password" placeholder="Mot de passe" class="form-control">
                 </div>
-                <button type="submit" class="btn btn-success">Connexion</button>
+                <button type="submit" class="btn btn-danger" >Déconnexion</button>
             </form>
         </div><!--/.navbar-collapse -->
     </div>
 </nav>
 
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-    <div class="container">
-        <h1>Salut les footix!</h1>
-        <p>Bienvenue sur Euro201664, un site vous permettant d'organiser un tournoi de pronostics entre amis</p>
-        <p><a class="btn btn-primary btn-lg" href="teams.html" role="button">Plus d'infos &raquo;</a></p>
-    </div>
-</div>
-
-<div class="container">
+<div class="container" ng-controller="TeamController">
     <!-- Example row of columns -->
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Simple</h2>
-            <p>Bla bla bla</p>
-            <p><a class="btn btn-default" href="#" role="button">Aperçu &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Gratuit</h2>
-            <p>La seule chose à payer c'est la bouteille que vous devez offrir à votre pote qui a fini vainqueur du tournoi alors qu'il n'y connait que dalle... </p>
-            <!--<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>-->
-        </div>
-        <div class="col-md-4">
-            <h2>Social</h2>
-            <p>Echangez avec vos amis grâce au fil de discussion présent sur chaque compétion</p>
-            <p><a class="btn btn-default" href="#" role="button">Aperçu &raquo;</a></p>
-        </div>
-    </div>
+    <h1>Equipes</h1>
 
+    <ul>
+        <li ng-repeat="team in teams">{{team.name}}</li>
+    </ul>
+
+    <hr>
+    <a class="btn btn-danger" href="index.html" role="button">Retour</a>
     <hr>
 
     <footer>
@@ -83,6 +64,10 @@
 
 <script type="text/javascript" src="./bower_components/angular/angular.min.js"></script>
 <script type="text/javascript" src="./bower_components/angular-resource/angular-resource.min.js"></script>
+<script src="app/scripts/app.js"></script>
+<script src="app/scripts/controllers.js"></script>
+<script src="app/scripts/services.js"></script>
+
 </body>
 </html>
 
