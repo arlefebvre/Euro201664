@@ -46,12 +46,17 @@
 </nav>
 
 <div class="container" ng-controller="TeamController">
-    <!-- Example row of columns -->
     <h1>Equipes</h1>
 
-    <ul>
-        <li ng-repeat="team in teams">{{team.name}}</li>
-    </ul>
+    <table class="table table-striped">
+        <tbody>
+        <tr ng-repeat="team in teams">
+            <td><img ng-src="{{team.imgUrl}}"></td>
+            <td>{{team.countryCode}}</td>
+            <td>{{team.name}}</td>
+        </tr>
+        </tbody>
+    </table>
 
     <hr>
     <a class="btn btn-danger" href="index.html" role="button">Retour</a>
