@@ -7,10 +7,10 @@
 //});
 
 var TeamFactory = function($resource) {
-//    return $resource('/teams', {}, {
-         //           query: {method:'GET', isArray:true}
-         //    });
-         return $resource('/teams/:teamId', {teamId:'@id'});
+    return $resource('/uefa/teams', {}, {
+                    'query': {method:'GET', isArray:true}
+             });
+         //return $resource('/teams/:teamId', {teamId:'@id'});
   };
 
 TeamFactory.$inject = ['$resource'];

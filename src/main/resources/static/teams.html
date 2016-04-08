@@ -48,10 +48,14 @@
 <div class="container" ng-controller="TeamController">
     <!-- Example row of columns -->
     <h1>Equipes</h1>
+<div ng-repeat="team in teams">
+    <h3><img ng-src="{{team.imgUrl}}">{{team.name}}</h3>
+    <hr>
+</div>
 
-    <ul>
-        <li ng-repeat="team in teams">{{team.name}}</li>
-    </ul>
+    <!--<ul >-->
+        <!--<li ng-repeat="team in teams">{{team.name}}</li>-->
+    <!--</ul>-->
 
     <hr>
     <a class="btn btn-danger" href="index.html" role="button">Retour</a>
