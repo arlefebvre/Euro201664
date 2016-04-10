@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-css-only",
-  "version": "3.2.0",
+  "description": "[Bootstrap](http://getbootstrap.com/) CSS and font libraries only. No javascript, and more importantly NO bower depenedency on jQuery.",
   "keywords": [
     "twitter",
     "bootstrap",
@@ -8,9 +8,15 @@
     "css"
   ],
   "main": [
-    "css/bootstrap.css"
+    "css/bootstrap.css",
+    "fonts/glyphicons-halflings-regular.eot",
+    "fonts/glyphicons-halflings-regular.svg",
+    "fonts/glyphicons-halflings-regular.ttf",
+    "fonts/glyphicons-halflings-regular.woff",
+    "fonts/glyphicons-halflings-regular.woff2"
   ],
   "homepage": "http://getbootstrap.com/",
+  "license": "MIT",
   "author": {
     "name": "Twitter Inc."
   },
