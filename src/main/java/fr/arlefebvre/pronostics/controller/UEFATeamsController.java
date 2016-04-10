@@ -45,6 +45,7 @@ public class UEFATeamsController {
                     team.setName(name);
                     team.setCountryCode(countryCode);
                     team.setImgUrl(imgUrl);
+                    team.setNationalTeam(true);
                     result.add(team);
                 }
             }

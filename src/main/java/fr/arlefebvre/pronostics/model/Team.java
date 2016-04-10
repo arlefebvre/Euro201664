@@ -17,6 +17,16 @@ public class Team {
 
     private String imgUrl;
 
+    private boolean isNationalTeam;
+
+    public boolean isNationalTeam() {
+        return isNationalTeam;
+    }
+
+    public void setNationalTeam(boolean nationalTeam) {
+        isNationalTeam = nationalTeam;
+    }
+
     public String getName() {
         return name;
     }
