@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 /**
  * Created by alefebvre on 06/04/2016.
  */
-public class Prediction {
+public class Match {
     @Id
     private String id;
 
