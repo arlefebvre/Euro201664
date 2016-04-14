@@ -72,10 +72,13 @@ public class Application {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests()//.antMatchers("/").permitAll()
-                    .antMatchers("/teams.html").authenticated()
+                    .antMatchers(
+                            "/teams.html",
+                            "/menu.html"
+                    ).authenticated()
                     //.anyRequest().authenticated()
-                    .and().logout().logoutUrl("/logout").logoutSuccessUrl("/").clearAuthentication(true).permitAll()
-                    .and().formLogin().loginPage("/index.html").permitAll().defaultSuccessUrl("/login.html")
+                    .and().logout().logoutUrl("/logout").logoutSuccessUrl("/index.html").clearAuthentication(true).permitAll()
+                    .and().formLogin().loginPage("/index.html").permitAll().defaultSuccessUrl("/menu.html")
                     .and().csrf().disable();
         }
 
