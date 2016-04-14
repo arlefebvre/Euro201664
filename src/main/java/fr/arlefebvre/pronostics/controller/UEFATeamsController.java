@@ -45,8 +45,12 @@ import java.util.stream.Collectors;
 @RestController
 public class UEFATeamsController {
 
+    private ArrayList<Team> pseudoCache;
+
     @RequestMapping("/uefa/teams")
     public List<Team> teams() {
+        if(pseudoCache!=null && !pseudoCache.isEmpty())
+            return pseudoCache;
         ArrayList<Team> result = new ArrayList<Team>();
         String uri = "http://fr.fifa.com/fifa-world-ranking/ranking-table/men/uefa.html";
 
@@ -88,6 +92,8 @@ public class UEFATeamsController {
 //        List<ChampionDto> champions = response.getBody().getChampions();
 //        return champions.stream().map(c -> getChampionById(c.getId()).getName()).collect(Collectors.toList());
         result.sort((t1,t2)->t1.getName().compareTo(t2.getName()));
+        if(pseudoCache == null)
+            pseudoCache = result;
         return result;
     }
 }
