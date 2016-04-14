@@ -30,15 +30,9 @@ import fr.arlefebvre.pronostics.repo.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
-import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -63,11 +57,6 @@ public class Application {
     @EnableWebSecurity
     @Configuration
     public static class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-//        @Override
-//        public void init(WebSecurity web) throws Exception{
-//            web.ignoring().antMatchers("/");
-//        }
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
@@ -96,14 +85,14 @@ public class Application {
 
                 @Override
                 public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                    //Account account = accountRepository.findByLogin(username);
-                    //if(account != null) {
-                    return new User(username, "", true, true, true, true,
+                    Account account = accountRepository.findByLogin(username);
+                    if(account != null) {
+                    return new User(account.getLogin(), account.getPassword(), true, true, true, true,
                             AuthorityUtils.createAuthorityList("USER"));
-                    //} else {
-                    //    throw new UsernameNotFoundException("could not find the user '"
-                    //           + username + "'");
-                    //}
+                    } else {
+                        throw new UsernameNotFoundException("could not find the user '"
+                               + username + "'");
+                    }
                 }
 
             };
