@@ -24,72 +24,63 @@
 
 package fr.arlefebvre.pronostics.controller;
 
+import fr.arlefebvre.pronostics.model.Match;
 import fr.arlefebvre.pronostics.model.Team;
 import org.jsoup.Jsoup;
-import org.jsoup.select.Elements;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
- * Created by alefebvre on 08/04/2016.
+ * Created by Arthur on 14/04/2016.
  */
 @RestController
-public class UEFATeamsController {
+public class EuroMatchListController {
+    private ArrayList<Match> pseudoCache;
 
-    private ArrayList<Team> pseudoCache;
-
-    @RequestMapping("/uefa/teams")
-    public List<Team> teams() {
+    @RequestMapping("/euro2016/matches")
+    public List<Match> matches() {
         if(pseudoCache!=null && !pseudoCache.isEmpty())
             return pseudoCache;
-        ArrayList<Team> result = new ArrayList<Team>();
-        String uri = "http://fr.fifa.com/fifa-world-ranking/ranking-table/men/uefa.html";
+        ArrayList<Match> result = new ArrayList<Match>();
+        String uri = "http://www.lequipe.fr/Football/Euro/Saison-2016/calendrier-resultats.html";
 
         //On se connecte au site et on charge le document html
 
         Document doc;
         try {
             doc = Jsoup.connect(uri).get();
-            Elements elements= doc.getElementsByClass("table");
+
+            Elements elements= doc.getElementsByClass("mainDate");
             for (Element element : elements) {
+                Element title = element.getElementsByClass("title").first();
+                String date = title.text();
+
                 Element tbody = element.getElementsByTag("tbody").first();
-                for (Element child : tbody.children()) {
-                    Element teamNameElement = child.getElementsByClass("tbl-teamname").first();
-                    String name =  teamNameElement.text();
-                    String countryCode =  child.getElementsByClass("tbl-countrycode").first().text();
-                    String imgUrl = teamNameElement.select("img").first().absUrl("src");
-                    Team team = new Team();
-                    team.setName(name);
-                    team.setCountryCode(countryCode);
-                    team.setImgUrl(imgUrl);
-                    team.setNationalTeam(true);
-                    result.add(team);
+                for (Element matchElement : tbody.children()) {
+                    String groupe = matchElement.getElementsByClass("date").first().text();
+                    String home = matchElement.getElementsByClass("domicile").first().text();
+                    String away = matchElement.getElementsByClass("exterieur").first().text();
+
+                    Match m = new Match();
+                    m.setDate(date);
+                    m.setHomeTeamId(home);
+                    m.setAwayTeamId(away);
+                    m.setGroup(groupe);
+                    result.add(m);
                 }
             }
 
-
-            //String titre =  element.text();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-//        RestTemplate restTemplate = new RestTemplate();
-//        ResponseEntity<ChampionListDto> response = restTemplate.getForEntity(
-//                uri,
-//                ChampionListDto.class);
-//
-//        List<ChampionDto> champions = response.getBody().getChampions();
-//        return champions.stream().map(c -> getChampionById(c.getId()).getName()).collect(Collectors.toList());
-        result.sort((t1,t2)->t1.getName().compareTo(t2.getName()));
         if(pseudoCache == null)
             pseudoCache = result;
         return result;

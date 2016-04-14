@@ -38,6 +38,24 @@ public class Match {
     private String awayTeamId;
     private int homeTeamScore;
     private int awayTeamScore;
+    private String date;
+    private String group;
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public String getUserId() {
         return userId;
