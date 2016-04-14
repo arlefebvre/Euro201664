@@ -6,13 +6,21 @@ package fr.arlefebvre.pronostics.model;
 
 import org.springframework.data.annotation.Id;
 
-public class User {
+public class Account {
 
     @Id
     private String id;
 
     private String login;
     private String password;
+
+    public Account() {
+    }
+
+    public Account(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
 
     public String getLogin() {
         return login;
