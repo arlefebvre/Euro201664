@@ -15,4 +15,14 @@ var TeamFactory = function($resource) {
 
 TeamFactory.$inject = ['$resource'];
 angular.module("myApp.services").factory("Team", TeamFactory);
+
+
+var MatchFactory = function($resource) {
+    return $resource('/euro2016/matches', {}, {
+                    'query': {method:'GET', isArray:true}
+             });
+};
+MatchFactory.$inject = ['$resource'];
+angular.module("myApp.services").factory("Match", MatchFactory);
+
 }(angular));

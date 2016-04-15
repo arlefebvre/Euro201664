@@ -1,15 +1,15 @@
  (function(angular) {
- //var TeamController =function ($scope) {
- var TeamController =function ($scope, Team) {
- //console.log(Team.query());
-$scope.teams = Team.query();
-//$scope.teams = [{ "name" : "France" }, { "name" : "Brazil" }];
 
-//$scope.select = function(team) {
-//    $scope.editedPhone = phone;
-//};
+ var TeamController =function ($scope, Team) {
+$scope.teams = Team.query();
 }
-//TeamController.$inject = ['$scope'];
 TeamController.$inject = ['$scope', 'Team'];
 angular.module("myApp.controllers").controller("TeamController", TeamController);
+
+ var MatchController =function ($scope, Match) {
+$scope.matches = Match.query();
+}
+MatchController.$inject = ['$scope', 'Match'];
+angular.module("myApp.controllers").controller("MatchController", MatchController);
+
 }(angular));

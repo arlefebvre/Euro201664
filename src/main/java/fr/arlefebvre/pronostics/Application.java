@@ -58,12 +58,16 @@ public class Application {
     @Configuration
     public static class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+        @Autowired
+        AccountRepository accountRepository;
+
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests()//.antMatchers("/").permitAll()
                     .antMatchers(
                             "/teams.html",
-                            "/menu.html"
+                            "/menu.html",
+                            "/matches.html"
                     ).authenticated()
                     //.anyRequest().authenticated()
                     .and().logout().logoutUrl("/logout").logoutSuccessUrl("/index.html").clearAuthentication(true).permitAll()
@@ -75,9 +79,6 @@ public class Application {
         public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
             auth.userDetailsService(userDetailsService());
         }
-
-        @Autowired
-        AccountRepository accountRepository;
 
         @Override
         protected UserDetailsService userDetailsService() {
