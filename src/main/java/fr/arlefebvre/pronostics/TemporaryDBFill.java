@@ -25,11 +25,11 @@
 package fr.arlefebvre.pronostics;
 
 import fr.arlefebvre.pronostics.model.Account;
+import fr.arlefebvre.pronostics.model.Player;
 import fr.arlefebvre.pronostics.repo.AccountRepository;
+import fr.arlefebvre.pronostics.repo.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 /**
@@ -41,10 +41,20 @@ public class TemporaryDBFill implements CommandLineRunner{
     @Autowired
     AccountRepository accountRepository;
 
+    @Autowired
+    PlayerRepository playerRepository;
+
     @Override
     public void run(String... strings) throws Exception {
         accountRepository.deleteAll();
         Account acc = new Account("toto","");
         accountRepository.save(acc);
+
+        playerRepository.deleteAll();
+        Player p = new Player();
+        p.setName("Joueur 1");
+        p.setMail("aa@aa.fr");
+        p.setSheetId("567886786hdj4686486");
+        playerRepository.save(p);
     }
 }

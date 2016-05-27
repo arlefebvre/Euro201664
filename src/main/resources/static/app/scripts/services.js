@@ -25,4 +25,12 @@ var MatchFactory = function($resource) {
 MatchFactory.$inject = ['$resource'];
 angular.module("myApp.services").factory("Match", MatchFactory);
 
+var PlayerFactory = function($resource) {
+    return $resource('/admin/players', {}, {
+                    'query': {method:'GET', isArray:true}
+             });
+};
+PlayerFactory.$inject = ['$resource'];
+angular.module("myApp.services").factory("Player", PlayerFactory);
+
 }(angular));

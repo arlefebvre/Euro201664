@@ -22,44 +22,18 @@
  * SOFTWARE.
  */
 
-package fr.arlefebvre.pronostics.model;
+package fr.arlefebvre.pronostics.repo;
 
-import org.springframework.data.annotation.Id;
+import fr.arlefebvre.pronostics.model.Player;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 /**
  * Created by alefebvre on 06/04/2016.
- * <p>
- * Represents a player
  */
-public class Player {
-    @Id
-    private String id;
-
-    private String name;
-    private String mail;
-    private String sheetId;
-
-    public String getSheetId() {
-        return sheetId;
-    }
-
-    public void setSheetId(String sheetId) {
-        this.sheetId = sheetId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
+//@RepositoryRestResource(collectionResourceRel = "people", path = "people")
+public interface PlayerRepository extends MongoRepository<Player, String> {
+    List<Player> findByName(@Param("name") String name);
 }

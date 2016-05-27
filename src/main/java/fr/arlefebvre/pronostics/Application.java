@@ -67,7 +67,8 @@ public class Application {
                     .antMatchers(
                             "/teams.html",
                             "/menu.html",
-                            "/matches.html"
+                            "/matches.html",
+                            "/players.html"
                     ).authenticated()
                     //.anyRequest().authenticated()
                     .and().logout().logoutUrl("/logout").logoutSuccessUrl("/index.html").clearAuthentication(true).permitAll()
